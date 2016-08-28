@@ -4,7 +4,6 @@ import GistService from './GistService'
 import ForkService from './ForkService'
 import appTemplate from './app.html'
 import '../style/app.css';
-import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
 
 const MODULE_NAME = 'gistApp';
 
