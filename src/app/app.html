@@ -1,0 +1,40 @@
+<main>
+  <header>
+    <h1 class="title">GitHub Gist</h1>
+  </header>
+  <div class="gist-user">
+  	<input type="text" name="username" ng-model="app.username" class="gist-user-field" placeholder="GitHub Username">
+  	<button ng-click="app.getPublicGists()" class="btn">Public Gists</button>
+  </div>
+  <div class="gists" ng-show="app.gistTabs">
+  	<div ng-repeat="gist in app.gistTabs" 
+  		class="gist-tab" 
+  		ng-class="{selected: app.selectedGist.id == gist.id}" 
+  		ng-click="app.selectGist(gist)">
+  		<div class="gist-name">{{gist.name}}</div>
+  		<div class="desc">{{gist.description}}</div>
+  		<div class="recent-forks" ng-show="gist.forks.length > 0">
+  			<div class="title">Recent Forks</div>
+			<a ng-repeat="fork in gist.forks" href="{{fork.html_url}}" target="_blank" title="{{fork.owner.login}}">
+				<img ng-src="{{fork.owner.avatar_url}}" width="32px"  class="avatar"/>
+			</a>
+  		</div>
+  		<div class="tags" ng-show="gist.tags.length > 0">
+  			<span class="tag" ng-repeat="tag in gist.tags">{{tag}}</span>
+  		</div>
+  	</div>
+  </div>
+  <div>
+
+  	<nav class="file-nav">
+		<a ng-repeat="file in app.selectedGistFiles" 
+			ng-click="app.getFileContent(file)" 
+			ng-class="{selected: file.filename == app.selectedFile.filename}">
+			{{file.filename}}
+		</a>
+	</nav>
+
+  	<div class="file-content" ng-show="app.fileContent"><pre><code>{{app.fileContent}}</code></pre></div>
+  </div>
+  <div ng-hide="app.gistTabs" class="message">{{app.message}}</div>
+</main>
