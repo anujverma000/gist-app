@@ -10,7 +10,7 @@ const MODULE_NAME = 'gistApp';
 let app = () => {
   return {
     template: appTemplate,
-    controller: 'GistAppCtrl',
+    controller: 'gistAppCtrl',
     controllerAs: 'app'
   }
 };
@@ -19,6 +19,6 @@ angular.module(MODULE_NAME, [])
   .directive('gistApp', app)
   .service('gistService', GistService)
   .service('forkService', ForkService)
-  .controller('GistAppCtrl', GistAppCtrl);
+  .controller('gistAppCtrl', GistAppCtrl);
 
 export default MODULE_NAME;

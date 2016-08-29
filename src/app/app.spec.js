@@ -1,32 +1,43 @@
 import app from './app';
-
+import GistAppCtrl from './GistAppCtrl.js';
 describe('app', () => {
 
   describe('GistAppCtrl', () => {
-    let gistAppCtrl, forkServ, gistServ;
-
+    let vm;
     beforeEach(() => {
-      angular.mock.module(app);
-      
-      angular.mock.inject(function GetDependencies(gistService) {
-        gistServ = gistService;
-      });
+        angular.mock.module(app);
+        vm = new GistAppCtrl();
 
-      angular.mock.inject(function GetDependencies(forkService) {
-        forkServ = forkService;
-      });
+        angular.mock.inject(gistService => vm.gistService = gistService);
+        angular.mock.inject(forkService => vm.forkService = forkService);
 
-      angular.mock.inject(($controller) => {
-        gistAppCtrl = $controller(function GistAppCtrl() {
-          this.gistService = gistServ;
-          this.forkService = forkServ;
-          this.username = 'test'
-        }, {});
-      });
+        vm.username = 'test'
+        spyOn(vm, 'getPublicGists')
+
+        vm.getPublicGists()
     });
 
-    it('should contain the username', () => {
-      expect(gistAppCtrl.username).toBe('test');
+    it('should have called getPublicGists() method', () => {
+      expect(vm.getPublicGists).toHaveBeenCalled();
+    })
+
+    it('should contain the empty username', () => {
+      expect(vm.username).toBe('test');
     });
+
+    it('should reset all the data', () =>{
+      describe('GistAppCtrl', () => {
+          beforeEach(() => {
+            spyOn(vm, 'resetData')
+            vm.resetData();
+          })
+          it('should clear the data from all the vaiables' ,() => {
+            expect(vm.resetData).toHaveBeenCalled();
+            expect(vm.gistTabs).toBe(undefined);
+
+          })
+      });
+    })
+
   });
 });
