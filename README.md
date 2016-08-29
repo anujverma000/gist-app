@@ -15,6 +15,4 @@ Open `http://localhost:8080`.
 
 ## Testing
 
-#### 1. Unit Tests
-
-* `npm test`
+ `npm test`

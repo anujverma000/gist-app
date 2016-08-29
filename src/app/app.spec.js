@@ -11,7 +11,6 @@ describe('app', () => {
         angular.mock.inject(gistService => vm.gistService = gistService);
         angular.mock.inject(forkService => vm.forkService = forkService);
 
-        vm.username = 'test'
         spyOn(vm, 'getPublicGists')
 
         vm.getPublicGists()
@@ -22,7 +21,7 @@ describe('app', () => {
     })
 
     it('should contain the empty username', () => {
-      expect(vm.username).toBe('test');
+      expect(vm.username).toBe('');
     });
 
     it('should reset all the data', () =>{
